@@ -1,21 +1,15 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
+import { EngineContext } from "../../contexts/EngineContext";
 
-export default class BottomNavUi extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inBattle: true
-    };
-  }
-  render() {
+  const BottomNavUi = (props) => {
+    const { inBattle, dispatch }  = useContext(EngineContext)
     return (
       <div className="bottom-nav">
         <div className="story-text">
           This is a place holder for nodes holding text
         </div>
         <div className="btn-container">
-          {!this.state.inBattle ? (
+          {!useState(inBattle) ? (
             <div className="cardinal-container">
               <button>North</button>
               <button>East</button>
@@ -24,15 +18,16 @@ export default class BottomNavUi extends Component {
             </div>
           ) : (
             <div className="battle-container">
-              <button >Attack</button>
-              <button >Defend</button>
-              <button >Run</button>
+              <button onClick={() => dispatch({type: 'ATK'})}>Attack</button>
+              <button onClick={() => dispatch({type: 'DEF'})}>Defend</button>
+              <button onClick={() => dispatch({type: 'ESC'})}>Run</button>
             </div>
           )}
-          <button>Items</button>
-          <button>Inspect</button>
+          <button onClick={() => dispatch({type: 'INV'})}>Items</button>
+          <button onClick={() => dispatch({type: 'INS'})}>Inspect</button>
         </div>
       </div>
     );
-  }
 }
+
+export default BottomNavUi;

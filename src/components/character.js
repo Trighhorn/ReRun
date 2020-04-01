@@ -12,7 +12,9 @@ export default class Character extends Component {
       health: 100,
       dmg: 10,
       amr: 10,
-      level: 1
+      level: 1,
+      equipped_wep: 1,
+      equipped_amr: 2,
     };
   }
 

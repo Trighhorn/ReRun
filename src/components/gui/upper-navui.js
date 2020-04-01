@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
+import { EngineContext } from "../../contexts/EngineContext";
 
-export default class UpperNavUi extends Component {
-  render() {
+ const  UpperNavUi = () => {
+  const { dispatch }  = useContext(EngineContext)
     return (
       <div className="top-nav">
         <div className="title"> ReRun </div>
-        <button className="settings-nav-btn"> Settings</button>
+        <button onClick={() => dispatch({type: 'SET'})} className="settings-nav-btn"> Settings </button>
       </div>
     );
-  }
 }
+
+
+export default UpperNavUi;
