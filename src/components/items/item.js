@@ -1,7 +1,7 @@
 import React from "react";
 
 const Item = props => {
-  const { id, type, name, main_stat, tier } = props.item;
+  const { type, name, main_stat, tier } = props.item;
 
   function StatIdentifier(type) {
     switch (type) {

@@ -10,37 +10,41 @@ const EngineContextProvider = (props) => {
     const [inBattle, setInBattle] = useState(true)
     const [equippedWep, setEquippedWep] = useState()
     const [equippedAmr, setEquippedAmr] = useState()
+    const [storyBox, setStoryBox] = useState('This is a place holder for nodes holding text')
+    const [player, setPlayer] = useState({
+        totalHealth: 100,
+        currentHealth: null,
+        equippedWep: {
+            id: 1,
+            main_stat: 7
+        },
+        equippedAmr: {
+            id: 1,
+            main_stat: 7
+        }
+    })
+    const [enemy, setEnemy] = useState({
+        totalHealth: 100,
+        currentHealth: null,
+        equippedWep: {
+            //spread data in ...
+            id: 1,
+            main_stat: 15
+        },
+        equippedAmr: {
+            //spread data in ...
+            id: 1,
+            main_stat: 15
+        }
+    })
 
 
     const [state, dispatch] = useReducer(guiClicksReducer)
 
-    // function clickAction(act) {
-    //     if (act === "ATK") {
-    //         totalDmg =( atker.dmg + 
-    //             20
-    //             // equippedWep.mainstat 
-    //             - totalDef)
-    //         this.setEnemyIsNext({enemyIsNext: !enemyIsNext})
-    //         // return this.targ.health - totalDmg
-    //         console.log(this.targ.health - totalDmg)
-    //     } if (act === "DEF") {
-    //         totalDmg = (atker.dmg + 
-    //             20
-    //             // equippedWep.mainstat 
-    //             - (totalDef + 20))
-    //         this.setEnemyIsNext({enemyIsNext: !enemyIsNext})
-    //         return this.targ.health - totalDmg
-    //     }if (act === "ESC") {
-    //         escChance = math.random() * 10
-    //         if (escChance > 6) {
-    //             setInbattle(false)
-    //         }
-    //     }if (act === "SET") {
-    //         // open react modal
-    //     }
-    // }
+
+
     return ( 
-        <EngineContext.Provider  value={{...[enemyIsNext, inBattle, equippedWep, equippedAmr], dispatch}}>
+        <EngineContext.Provider  value={{...[enemyIsNext, inBattle, equippedWep, equippedAmr], dispatch, storyBox}}>
             { props.children }
         </EngineContext.Provider>
         )

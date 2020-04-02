@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { EngineContext } from "../../contexts/EngineContext";
 
   const BottomNavUi = (props) => {
-    const { inBattle, dispatch }  = useContext(EngineContext)
+    const { inBattle, dispatch, storyBox }  = useContext(EngineContext)
+    const storyText = useState(storyBox)
     return (
       <div className="bottom-nav">
-        <div className="story-text">
-          This is a place holder for nodes holding text
+        <div id="story-text">
+          {storyText}
         </div>
         <div className="btn-container">
           {!useState(inBattle) ? (

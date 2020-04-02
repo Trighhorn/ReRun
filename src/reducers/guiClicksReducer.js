@@ -1,23 +1,36 @@
 import React, {useState} from 'react'
 
+import EngineContext from '../contexts/EngineContext'
+
 export const guiClicksReducer = (state, action) => {
-    // const targ = useState(enemyIsNext) ? 'enemys data' : 'players data'
-    // const atker = useState(enemyIsNext) ? 'players data' : 'players data'
+ 
+    const targ = useState(enemyIsNext) ? useState(enemy) : useState(player)
+    const atker = useState(enemyIsNext) ? useState(player) : useState(enmy)
     // const totalDef = (targ.def +
     //     20 
     //     // equippedAmr.mainstat
     //     )
-    switch(action.type){
-        case 'ATK':
-            return[
-                // totalDmg =( atker.dmg + 
-                //     20
-                //     // equippedWep.mainstat 
-                //     - totalDef),
+    const totalHealth = 100;
+    const totalDmg =( 
+        (15
+        // atker.dmg 
+        + 
+        20)
+        // equippedWep.mainstat 
+        - 
+        10
+        // totalDef
+        )
+        
+        switch(action.type){
+            case 'ATK':
+                return[
+                currentHealth = totalHealth,
+                currentHealth = (currentHealth - totalDmg),
                 // this.setEnemyIsNext({enemyIsNext: !useState(enemyIsNext)}),
-                // return this.targ.health - totalDmg
-                // console.log(this.targ.health - totalDmg)
-                console.log('ATTACK BUTTON CLICKED')
+                // this.targ.health - totalDmg
+                console.log(currentHealth)
+                // console.log('ATTACK BUTTON CLICKED')
             ]
         case 'DEF':
             return[
