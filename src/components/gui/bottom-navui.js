@@ -1,16 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useReducer } from "react";
 import { EngineContext } from "../../contexts/EngineContext";
 
+import { clicksObj, guiClicksReducer } from "../../reducers/guiClicksReducer"
+
   const BottomNavUi = (props) => {
-    const { inBattle, dispatch, storyBox }  = useContext(EngineContext)
-    const storyText = useState(storyBox)
+    const { inBattle, storyBox, setStoryBox, clicksObj, setEnemyIsNext, enemyIsNext, enemy }  = useContext(EngineContext)
+
+    function handleClick(filter) {
+      switch(filter){
+        case 'ATK':
+          return(clicksObj.attack())
+        case "DEF":
+          return(clicksObj.defend())
+        case "ESC":
+          return(setStoryBox("Cant run away in current Build"))
+        case "INV":
+          return(setStoryBox("Cant change items in current build"))
+        case "INS":
+          setStoryBox(enemy.desc)
+
+      }
+      setEnemyIsNext(!enemyIsNext)
+    }
+    
     return (
       <div className="bottom-nav">
         <div id="story-text">
-          {storyText}
+          {storyBox}
         </div>
         <div className="btn-container">
-          {!useState(inBattle) ? (
+          {!inBattle ? (
             <div className="cardinal-container">
               <button>North</button>
               <button>East</button>
@@ -19,13 +38,16 @@ import { EngineContext } from "../../contexts/EngineContext";
             </div>
           ) : (
             <div className="battle-container">
-              <button onClick={() => dispatch({type: 'ATK'})}>Attack</button>
-              <button onClick={() => dispatch({type: 'DEF'})}>Defend</button>
-              <button onClick={() => dispatch({type: 'ESC'})}>Run</button>
+              <button onClick={() => handleClick('ATK')}>Attack</button>
+              <button onClick={() => handleClick('DEF')}>Defend</button>
+              <button onClick={() => handleClick('ESC')}>Run</button>
+              {/* <button onClick={() => dispatch({type: ''})}>Defend</button>
+              <button onClick={() => dispatch({type: ''})}>Run</button> */}
             </div>
           )}
-          <button onClick={() => dispatch({type: 'INV'})}>Items</button>
-          <button onClick={() => dispatch({type: 'INS'})}>Inspect</button>
+           <button onClick={() => handleClick('INV')}>Items</button>
+           <button onClick={() => handleClick('INS')}>Inspect</button>
+          {/* <button onClick={() => dispatch({type: 'INS'})}>Inspect</button> */}
         </div>
       </div>
     );

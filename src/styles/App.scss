@@ -7,6 +7,9 @@
   font-family: "VT323", monospace;
   color: white;
   font-size: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 body {
   margin: 0;
