@@ -4,12 +4,12 @@ import { EngineContext } from "../../contexts/EngineContext";
 import { clicksObj } from "../../contexts/EngineContext"
 
   const BottomNavUi = (props) => {
-    const { inBattle, storyBox, setStoryBox, setEnemyIsNext, enemyIsNext }  = useContext(EngineContext)
+    const {  enemyDidDef, setEnemyDidDef, playerDidDef, setPlayerDidDef, enemyCurrentHealth, setEnemyCurrentHealth, playerCurrentHealth, setPlayerCurrentHealth, inBattle, storyBox, setStoryBox, setEnemyIsNext, enemyIsNext }  = useContext(EngineContext)
     let player = {
-      Health: 100,
+      Health: playerCurrentHealth,
       dmg: 10,
       def: 10,
-      didDef: false,
+      didDef: playerDidDef,
       equippedWep: {
 
           main_stat: 7
@@ -25,10 +25,10 @@ import { clicksObj } from "../../contexts/EngineContext"
        It's grin is wide enough for you to see its exposed gums and yellow teeth thick saliva dripping from one of them. 
        it towers over you easily being taller than the room, Its staring right at you its intent clear. 
        its appendages resemble thick rubber hoses topped with pristine gloves that remind you of a certain character.`,
-      Health: 100,
+      Health: enemyCurrentHealth,
       dmg: 10,
       def: 10,
-      didDef: false,
+      didDef: enemyDidDef,
       equippedWep: {
           main_stat: 10
       },
@@ -43,18 +43,22 @@ import { clicksObj } from "../../contexts/EngineContext"
     const turnChance = Math.floor((Math.random() * 10))
     const doTurn = (turnChance) => {
       const enemyTotalDmg = enemy.dmg + enemy.equippedWep.main_stat - (player.didDef ? 10 : 0 )
-        console.log('Doing turn')
         if (turnChance > 7) {
-          console.log('Defended')
+          setStoryBox('Enemy gets ready to block')
+          setEnemyDidDef(true)
           postStats()
           setEnemyIsNext(!enemyIsNext)
-          player.didDef = false
+          setPlayerDidDef(false)
         }else ( turnChance <= 7 ); {
-          player.Health -= enemyTotalDmg
-          setStoryBox('Enemy ATTACKED')
+          setPlayerCurrentHealth(playerCurrentHealth - enemyTotalDmg)
+          setStoryBox(`Enemy Dealt ${enemyTotalDmg} damage`)
           postStats()
+          if (playerCurrentHealth <= 0) {
+            setPlayerCurrentHealth(0)
+            setStoryBox(`it picks you up. Its gaping maw was so much worse than you thought the last thing you hear is a sickening crunch... Refresh to play again `)
+          }
           setEnemyIsNext(!enemyIsNext)
-          player.didDef = false
+          setPlayerDidDef(false)
         }
     }
 
@@ -64,17 +68,22 @@ import { clicksObj } from "../../contexts/EngineContext"
         switch(filter) {
           case 'ATK':
             setStoryBox(`You Deal ${playerTotalDmg} Damage`) 
-            console.log(enemy.Health) 
-            enemy.Health -= playerTotalDmg
+            setEnemyCurrentHealth(enemyCurrentHealth - playerTotalDmg)
             postStats()
-            // setEnemyIsNext(!enemyIsNext)
+            if (enemyCurrentHealth <= 0) {
+              setEnemyCurrentHealth(0)
+              setStoryBox(`You win! Please refresh to try again`)
+            }
+            setEnemyDidDef(false)
+            setEnemyIsNext(!enemyIsNext)
             break;
             case 'DEF':
               console.log(enemy.Health) 
-              player.didDef = true
+              setPlayerDidDef(true)
               setStoryBox('You brace for a hit')
               postStats()
-              // setEnemyIsNext(!enemyIsNext)
+              setEnemyDidDef(false)
+              setEnemyIsNext(!enemyIsNext)
               break;
             case 'ESC':
                 postStats()
@@ -91,9 +100,9 @@ import { clicksObj } from "../../contexts/EngineContext"
             default:
               setStoryBox("Not A Button")  
         }
+        
       }else {
         doTurn(turnChance)
-        player.Health
       }
     }
     

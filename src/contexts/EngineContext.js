@@ -19,7 +19,11 @@ export const clicksObj = {
 const EngineContextProvider = (props) => {
     const [enemyIsNext, setEnemyIsNext] = useState(true)
     const [inBattle, setInBattle] = useState(true)
-    const [storyBox, setStoryBox] = useState('Welcome to My game Press Attack or Defend to start to start the battle')
+    const [storyBox, setStoryBox] = useState('Welcome to My game Press Attack or Defend to start the battle')
+    const [playerCurrentHealth, setPlayerCurrentHealth] = useState(100)
+    const [enemyCurrentHealth, setEnemyCurrentHealth]= useState(100)
+    const [playerDidDef, setPlayerDidDef] = useState(false)
+    const [enemyDidDef, setEnemyDidDef] = useState(false)
 
 
     const handleEnemyIsNext = () => {
@@ -29,7 +33,7 @@ const EngineContextProvider = (props) => {
 
 
     return ( 
-        <EngineContext.Provider  value={{ enemyIsNext, setEnemyIsNext, inBattle, storyBox, setStoryBox}}>
+        <EngineContext.Provider  value={{ playerDidDef, setPlayerDidDef, enemyDidDef, setEnemyDidDef, playerCurrentHealth, setPlayerCurrentHealth, enemyCurrentHealth, setEnemyCurrentHealth, enemyIsNext, setEnemyIsNext, inBattle, storyBox, setStoryBox}}>
             { props.children }
         </EngineContext.Provider>
         )
