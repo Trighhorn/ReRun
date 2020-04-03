@@ -2,10 +2,10 @@
 
 @import "./bottom-navui.scss";
 @import "./upper-navui.scss";
-
+@import "./variables.scss";
 .App {
   font-family: "VT323", monospace;
-  color: white;
+  color: $mainAccent;
   font-size: 20px;
   height: 100vh;
   display: flex;
@@ -14,7 +14,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: $mainColor;
   display: grid;
   width: 100vw;
   height: 100vh;

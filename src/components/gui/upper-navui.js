@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
-import { EngineContext } from "../../contexts/EngineContext";
+import React from "react";
+import { clicksObj } from "../../contexts/EngineContext";
 
  const  UpperNavUi = () => {
-  const { dispatch }  = useContext(EngineContext)
 
     return (
       <div className="top-nav">
         <div className="title"> ReRun </div>
-        <button onClick={() => dispatch({type: 'SET'})} className="settings-nav-btn"> Settings </button>
+        <button onClick={() => clicksObj.settings()} className="settings-nav-btn"> Settings </button>
       </div>
     );
 }

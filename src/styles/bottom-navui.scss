@@ -1,17 +1,33 @@
+@import './variables.scss';
+
 .bottom-nav {
   align-self: flex-end;
     display: grid;
+    height: 100%;
     width: 100%;
     #story-text{
+      margin-top: 50px;
       justify-self: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: white solid 5px;
+      border: $mainAccent solid 5px;
       border-radius: 15px;
       width: 90%;
-      height: 200px;
+      height: 500px;
       font-size: 25px;
+    }
+    #stats-container{
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+      justify-content: space-evenly;
+      border: $mainAccent solid 5px;
+      border-radius: 15px;
+      width: 90%;
+      height: 100px;
+      margin: 5px;
     }
     .btn-container {
   
@@ -19,15 +35,15 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      border: white solid 5px;
+      border: $mainAccent solid 5px;
       border-radius: 15px;
       width: 90%;
       height: 100px;
       margin: 5px;
       button {
-        background-color: black;
-        color: white;
-        border: white solid 2px;
+        background-color: $mainColor;
+        color: $mainAccent;
+        border: $mainAccent solid 2px;
         border-radius: 5px;
         font-family: "VT323", monospace;
         font-size: 38px;
